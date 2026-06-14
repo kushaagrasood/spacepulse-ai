@@ -1,24 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const { getImpact } = require("../backend/src/services/impactEngine");
 const Observation = require("../models/Observation");
 
-// Member 3 will push this — import once it exists
-// const { getImpact } = require("../services/impactEngine");
-
 router.post("/", async (req, res) => {
-  const { profession, event, severity, user_id } = req.body;
-
   try {
-    // TEMPORARY stub — replace with real engine once Member 3 pushes
-    // const result = await getImpact(profession, event, severity);
-
-    const result = {
-      impactScore: 8,
-      summary: "High disruption expected for this profession.",
-      recommendation: "Avoid GPS-reliant operations for the next 6 hours.",
-    };
-
-    // Save observation to MongoDB
+    const { profession, event, severity, user_id } = req.body;
+    const result = await getImpact(profession, event, severity);
     if (user_id) {
       await Observation.create({
         user_id,
@@ -26,7 +14,6 @@ router.post("/", async (req, res) => {
         impact_score: result.impactScore,
       });
     }
-
     res.json(result);
   } catch (err) {
     res.status(500).json({ error: err.message });

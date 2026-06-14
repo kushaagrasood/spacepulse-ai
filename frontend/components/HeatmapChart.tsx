@@ -4,15 +4,22 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 
 interface HeatmapChartProps {
   event: string;
   severity: number;
+  realScores?: { profession: string; score: number }[];
 }
 
+const clamp = (value: number) =>
+  Math.max(1, Math.min(10, value));
+
 const professionScores = (severity: number) => [
-  { profession: "Pilot",       score: Math.min(10, severity + 2) },
-  { profession: "Photographer", score: Math.min(10, severity + 1) },
-  { profession: "Researcher",  score: Math.min(10, severity) },
-  { profession: "Astronomer",  score: Math.min(10, severity - 1) },
-  { profession: "Student",     score: Math.min(10, severity - 2) },
-  { profession: "Farmer",      score: Math.min(10, severity - 4) },
+  { profession: "Pilot", score: clamp(severity + 2) },
+  { profession: "Airline Ops", score: clamp(severity + 2) },
+  { profession: "Satellite Op", score: clamp(severity + 2) },
+  { profession: "Photographer", score: clamp(severity + 1) },
+  { profession: "Researcher", score: clamp(severity) },
+  { profession: "Astronomer", score: clamp(severity - 1) },
+  { profession: "Student", score: clamp(severity - 2) },
+  { profession: "Farmer", score: clamp(severity - 4) },
+  { profession: "Maritime", score: clamp(severity - 1) },
 ];
 
 const barColor = (score: number) => {
@@ -43,8 +50,16 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   );
 };
 
-export default function HeatmapChart({ event, severity }: HeatmapChartProps) {
-  const data = professionScores(severity);
+export default function HeatmapChart({
+  event,
+  severity,
+  realScores,
+}: HeatmapChartProps) {
+
+  const data =
+    realScores && realScores.length > 0
+      ? realScores
+      : professionScores(severity);
 
   return (
     <div className="glass-card p-6">
@@ -53,7 +68,7 @@ export default function HeatmapChart({ event, severity }: HeatmapChartProps) {
         {event}
       </p>
 
-      <ResponsiveContainer width="100%" height={240}>
+      <ResponsiveContainer width="100%" height={320}>
         <BarChart data={data} layout="vertical" barCategoryGap="28%">
           <XAxis
             type="number"
@@ -65,7 +80,7 @@ export default function HeatmapChart({ event, severity }: HeatmapChartProps) {
           <YAxis
             type="category"
             dataKey="profession"
-            width={95}
+            width={140}
             tick={{ fill: 'rgba(232,234,246,0.65)', fontSize: 12, fontFamily: 'var(--font-body)' }}
             axisLine={false}
             tickLine={false}

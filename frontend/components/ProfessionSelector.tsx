@@ -1,5 +1,3 @@
-// Profession icons: keeping emoji for now but using a smaller, more intentional size.
-// If you want SVG icons later, swap `label` for an icon component per entry.
 const professions = [
   { id: "pilot",        label: "✈️", name: "Pilot" },
   { id: "photographer", label: "📸", name: "Photographer" },
@@ -7,6 +5,9 @@ const professions = [
   { id: "student",      label: "🎓", name: "Student" },
   { id: "researcher",   label: "🔬", name: "Researcher" },
   { id: "astronomer",   label: "🔭", name: "Astronomer" },
+  { id: "satelliteops",   label: "🛰️", name: "Satellite Ops" },
+  { id: "airlineops",   label: "📡", name: "Airline Ops" },
+  { id: "maritime",   label: "🚢", name: "Maritime" },
 ];
 
 interface Props {

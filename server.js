@@ -14,11 +14,13 @@ mongoose
   .catch((err) => console.error("❌ MongoDB error:", err));
 
 // Routes
-app.use("/api/events", require("./routes/events"));
-app.use("/api/impact", require("./routes/impact"));
-app.use("/api/weather", require("./routes/weather"));
-app.use("/api/satellites", require("./routes/satellites"));
+app.use("/api/events",    require("./routes/events"));
+app.use("/api/impact",    require("./routes/impact"));
+app.use("/api/weather",   require("./routes/weather"));
+app.use("/api/satellites",require("./routes/satellites"));
 app.use("/api/assistant", require("./routes/assistant"));
+app.use("/api/planner",   require("./routes/planner")); 
+app.use("/api/history", require("./routes/history"));
 
 // Health check
 app.get("/", (req, res) => res.json({ status: "SpacePulse backend running" }));

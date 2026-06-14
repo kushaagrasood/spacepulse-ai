@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import { LocationProvider } from "@/context/LocationContext";
 
 export const metadata: Metadata = {
   title: "SpacePulse AI",
@@ -8,13 +10,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col text-white" style={{ background: '#060610' }}>
-        {children}
+    <html lang="en">
+      <body>
+        <LocationProvider>
+          <Navbar />
+          {children}
+        </LocationProvider>
       </body>
     </html>
   );

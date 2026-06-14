@@ -5,14 +5,26 @@ async function fetchKpIndex() {
     const res = await fetch(NOAA_URL);
     if (!res.ok) throw new Error(`NOAA fetch failed: ${res.status}`);
     const data = await res.json();
-    if (!Array.isArray(data) || data.length === 0) return { kpIndex: null, severity: null };
+    if (!Array.isArray(data) || data.length === 0)
+      return { kpIndex: null, severity: null };
 
+    // Get most recent entry with valid data
     const last = data[data.length - 1];
-    const kp = Number(last.kp || last.kp_index || last.Kp || last.KP || last['kp_index']);
-    const kpIndex = Number.isFinite(kp) ? kp : null;
-    const severity = kpIndex == null ? null : Math.max(1, Math.min(10, Math.round((kpIndex / 9) * 10)));
+    const kpIndex = last.estimated_kp ?? last.kp_index ?? null;
 
-    return { kpIndex, severity };
+    if (kpIndex === null) return { kpIndex: null, severity: null };
+
+    // severity 1-10 scale
+    const severity = Math.max(1, Math.min(10, Math.round((kpIndex / 9) * 10)));
+
+    // human readable status
+    let status = 'quiet';
+    if (kpIndex >= 7) status = 'severe storm';
+    else if (kpIndex >= 5) status = 'moderate storm';
+    else if (kpIndex >= 4) status = 'active';
+    else if (kpIndex >= 2) status = 'unsettled';
+
+    return { kpIndex, severity, status, timeTag: last.time_tag };
   } catch (err) {
     return { kpIndex: null, severity: null, error: err.message };
   }
