@@ -14,6 +14,30 @@ SpacePulse AI answers **"why should I care?"**
 Select your profession, and our Groq-powered AI engine cross-references live space weather events with your specific context to generate a personalized impact score, plain-English summary, and actionable recommendation — in under a second.
 
 ---
+## Screenshots
+
+### Landing Page
+![Landing](assets/screenshots/hero.png)
+
+### Dashboard — Mission Control
+![Dashboard](assets/screenshots/1.png)
+![Dashboard Impact](assets/screenshots/2.png)
+
+### AI Impact Analysis
+![Impact](assets/screenshots/3.png)
+![Heatmap](assets/screenshots/4.png)
+
+### Sky Feed
+![Sky Feed](assets/screenshots/5.png)
+
+### AI Night Planner
+![Night Planner](assets/screenshots/6.png)
+![Planner Timeline](assets/screenshots/7.png)
+
+### Sky Chart
+![Sky Chart](assets/screenshots/8.png)
+
+---
 
 ## Features
 
