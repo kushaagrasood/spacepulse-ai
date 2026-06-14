@@ -192,19 +192,6 @@ Open `http://localhost:3000`
 
 ---
 
-## Team
-
-**Team PaperRex** · ArcNight Hackathon 2026
-
-| Member | Role |
-|---|---|
-| Sourja Bose | Team Lead · Backend |
-| Abhishek Paul | AI Engine |
-| Kushaagra Sood | Space Data |
-| Siddhartha Gupta | Frontend |
-
----
-
 ## License
 
-MIT License · © 2026 Team PaperRex
+MIT License · © 2026
